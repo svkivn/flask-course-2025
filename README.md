@@ -18,9 +18,14 @@ instance/
 
 This file sets environment variables for Flask. Example contents:
 
+You can use the `python-dotenv` package to automatically load variables from `.flaskenv` when starting your Flask app. Install it with:
+
+```
+pip install python-dotenv
+```
+
 ```env
 FLASK_APP=app.py
-FLASK_ENV=development
 ```
 
 ## Usage
