@@ -1,4 +1,4 @@
-# `.gitignore` and `.flaskenv`
+## `.gitignore` and `.flaskenv`
 
 These files help manage your Flask project's environment and version control.
 
