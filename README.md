@@ -42,17 +42,43 @@ The `app.py` file contains the main code for your Flask application. Typically, 
 You can start your Flask server in two common ways:
 
 - Using the Flask CLI:
-  ```
-  flask run
-  ```
-  This command runs the app using the settings in `.flaskenv`.
+    ```
+    flask run
+    ```
+    This command runs the app using the settings in `.flaskenv`.
 
 - Directly with Python:
-  ```
-  python app.py
-  ```
-  This runs the `app.py` file directly. Make sure it includes the following block:
-  ```python
-  if __name__ == "__main__":
-      app.run()
-  ```
+    ```
+    python app.py
+    ```
+    This runs the `app.py` file directly. Make sure it includes the following block:
+    ```python
+    if __name__ == "__main__":
+            app.run()
+    ```
+
+## Managing Dependencies
+
+To view installed Python packages, run:
+
+```
+pip list
+```
+
+To install a specific package, use:
+
+```
+pip install package_name
+```
+
+To save your project's dependencies, run:
+
+```
+pip freeze > requirements.txt
+```
+
+To install dependencies from `requirements.txt`, use:
+
+```
+pip install -r requirements.txt
+```
