@@ -45,7 +45,26 @@ The `app.py` file contains the main code for your Flask application. Typically, 
 ## Running the Server
 
 You can start your Flask server in two common ways:
+- Using environment variables in your terminal:
 
+    On Linux/Mac:
+    ```bash
+    export FLASK_APP=app.py
+    flask run
+    ```
+
+    On Windows (PowerShell):
+
+    ```powershell
+    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+    .venv/Scripts/Activate.ps1
+    set FLASK_APP=app.py
+    flask run
+    ```
+    ```bat
+    set FLASK_APP=app.py
+    flask run
+    ```
 - Using the Flask CLI:
     ```
     flask run
