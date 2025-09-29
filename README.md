@@ -1,108 +1,24 @@
-## `.gitignore` and `.flaskenv`
 
-These files help manage your Flask project's environment and version control.
+# Code Explanations
 
-## `.gitignore`
+## app.py
 
-This file tells Git which files or directories to ignore. Example contents:
+- Imports Flask and related modules for web development.
+- Creates a Flask app instance and loads configuration from `config.py`.
+Defines several types of routes in Flask:
 
-```gitignore
-__pycache__/
-*.pyc
-.env
-instance/
-*.db
-```
+- **Static routes**: Serve fixed URLs, such as the root (`/`).
+- **Dynamic routes**: Use URL parameters to capture values, e.g., `/hi/<string:name>`. [Learn more](https://www.geeksforgeeks.org/python/generating-dynamic-urls-in-flask/)
+- **Query parameter routes**: Accept additional data via the URL query string, e.g., `/hi/ivan?age=30`. [Learn more](https://www.geeksforgeeks.org/python/get-request-query-parameters-with-flask/)
+- **Redirect routes**: Automatically forward users to another URL, such as `/admin` redirecting to the greetings page. [Learn more](https://www.geeksforgeeks.org/python/redirecting-to-url-in-flask/)
+	- `/` is the root route, which handles requests to the main page of the site.
+	- `/hi/<string:name>` greets the user by name (converted to uppercase) and optionally shows their age from the query string.
+		- This route demonstrates how to use query parameters. For example, `/hi/ivan?age=30` sets `name` to `ivan` and `age` to `30`. The code `age = request.args.get("age", 0, type=int)` retrieves the `age` parameter from the URL, defaulting to `0` if not provided.
+		- The return statement `f"Welcome {name=} {age=}"` uses an f-string to display the values of `name` and `age` in the response, and returns an HTTP status code 200 (OK).
+	- `/admin` redirects to the greetings page for "administrator".
+- The app runs with `app.run()` if executed directly.
 
-## `.flaskenv`
+## config.py
 
-This file sets environment variables for Flask. Example contents:
-
-You can use the `python-dotenv` package to automatically load variables from `.flaskenv` when starting your Flask app. Install it with:
-
-```
-pip install python-dotenv
-```
-
-```env
-FLASK_APP=app.py
-```
-
-## Usage
-
-- Place `.gitignore` in your project root to avoid committing unwanted files.
-- Use `.flaskenv` to configure Flask settings automatically when running the app.
-
-## Next Steps
-
-- Customize `.gitignore` for your needs.
-- Add more environment variables to `.flaskenv` as your app grows.
-
-## Understanding `app.py`
-
-The `app.py` file contains the main code for your Flask application. Typically, it creates a Flask app instance, defines routes, and handles requests.
-
-## Running the Server
-
-You can start your Flask server in two common ways:
-- Using environment variables in your terminal:
-
-    On Linux/Mac:
-    ```bash
-    export FLASK_APP=app.py
-    flask run
-    ```
-
-    On Windows (PowerShell):
-
-    ```powershell
-    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
-    .venv/Scripts/Activate.ps1
-    set FLASK_APP=app.py
-    flask run
-    ```
-    ```bat
-    set FLASK_APP=app.py
-    flask run
-    ```
-- Using the Flask CLI:
-    ```
-    flask run
-    ```
-    This command runs the app using the settings in `.flaskenv`.
-
-- Directly with Python:
-    ```
-    python app.py
-    ```
-    This runs the `app.py` file directly. Make sure it includes the following block:
-    ```python
-    if __name__ == "__main__":
-            app.run()
-    ```
-
-## Managing Dependencies
-
-To view installed Python packages, run:
-
-```
-pip list
-```
-
-To install a specific package, use:
-
-```
-pip install package_name
-```
-
-To save your project's dependencies, run:
-
-```
-pip freeze > requirements.txt
-```
-
-To install dependencies from `requirements.txt`, use:
-
-```
-pip install -r requirements.txt
-```
+- Sets `SECRET_KEY` for session security.
+- Enables debug mode with `FLASK_DEBUG = 1`.
