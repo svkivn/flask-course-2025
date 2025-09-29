@@ -1,24 +1,24 @@
+## Code Explanations
 
-# Code Explanations
+This project is a Flask web application with the following structure:
 
-## app.py
+- `run.py`: Entry point. Runs the Flask app.
+- `app/`: Main application package.
+	- `__init__.py`: Initializes the Flask app and loads configuration.
+	- `views.py`: Contains route/view definitions for the main app.
+	- `posts/`: Blueprint for post-related functionality.
+		- `__init__.py`: Initializes the posts blueprint.
+		- `views.py`: Contains routes/views for posts.
+		- `templates/posts/`: HTML templates for post pages (`detail_post.html`, `posts.html`).
+	- `templates/`: Main HTML templates (`base.html`, `hi.html`, `home.html`).
+- `config.py`: Configuration settings for Flask (e.g., secret key, debug mode).
+- `requirements.txt`: List of required Python packages.
+- `tests/`: Contains unit tests (e.g., `test_user_bp.py`). Uses Python's `unittest` framework. Sets up a test client for the Flask app.
 
-- Imports Flask and related modules for web development.
-- Creates a Flask app instance and loads configuration from `config.py`.
-Defines several types of routes in Flask:
+### How it works
 
-- **Static routes**: Serve fixed URLs, such as the root (`/`).
-- **Dynamic routes**: Use URL parameters to capture values, e.g., `/hi/<string:name>`. [Learn more](https://www.geeksforgeeks.org/python/generating-dynamic-urls-in-flask/)
-- **Query parameter routes**: Accept additional data via the URL query string, e.g., `/hi/ivan?age=30`. [Learn more](https://www.geeksforgeeks.org/python/get-request-query-parameters-with-flask/)
-- **Redirect routes**: Automatically forward users to another URL, such as `/admin` redirecting to the greetings page. [Learn more](https://www.geeksforgeeks.org/python/redirecting-to-url-in-flask/)
-	- `/` is the root route, which handles requests to the main page of the site.
-	- `/hi/<string:name>` greets the user by name (converted to uppercase) and optionally shows their age from the query string.
-		- This route demonstrates how to use query parameters. For example, `/hi/ivan?age=30` sets `name` to `ivan` and `age` to `30`. The code `age = request.args.get("age", 0, type=int)` retrieves the `age` parameter from the URL, defaulting to `0` if not provided.
-		- The return statement `f"Welcome {name=} {age=}"` uses an f-string to display the values of `name` and `age` in the response, and returns an HTTP status code 200 (OK).
-	- `/admin` redirects to the greetings page for "administrator".
-- The app runs with `app.run()` if executed directly.
-
-## config.py
-
-- Sets `SECRET_KEY` for session security.
-- Enables debug mode with `FLASK_DEBUG = 1`.
+1. The app is started via `run.py`, which imports and runs the Flask app from `app`.
+2. Routes are defined in `views.py` and `posts/views.py`, handling different URLs and logic.
+3. HTML templates render responses for users.
+4. Configuration is loaded from `config.py`.
+5. Tests are located in the `tests/` folder.

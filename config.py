@@ -1,2 +1,1 @@
-SECRET_KEY = "secret"
-FLASK_DEBUG = 1 
+SECRET_KEY = "secret-key-sdsfs"
