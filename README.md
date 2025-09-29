@@ -23,8 +23,14 @@ Follow these steps to get started with the course:
     ```bash
     git checkout lesson1-hello-world
     ```
+4. **Create and activate a virtual environment**:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate   # Linux/Mac
+    venv\Scripts\activate      # Windows
+    ```
 
-4. **Install dependencies**:
+5. **Install dependencies**:
     ```bash
     pip install -r requirements.txt
     ```
