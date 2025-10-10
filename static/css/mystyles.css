@@ -1,0 +1,43 @@
+/* --- Flash повідомлення --- */
+.flash-container .alert {
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 0.35rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- Основний контейнер --- */
+main.container {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* --- Футер --- */
+footer {
+    background-color: #f8f9fa;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* --- Картки продуктів (як приклад) --- */
+.product-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* --- Зображення адаптивні --- */
+img.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

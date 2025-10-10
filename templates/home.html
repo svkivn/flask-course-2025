@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+
+{% block head_extra %}
+    <link href="{{ url_for('static', filename='css/mystyles.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+  {{super()}}
+  <h1>Welcome! Home Page</h1> 
+  <p>Agent: {{ agent }}</p>
+
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}"
+       alt="About"
+       class="img-fluid rounded shadow-sm">
+{% endblock %}
+
+

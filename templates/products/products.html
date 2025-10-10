@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+
+{% block head_extra %}
+    <link href="{{ url_for('static', filename='css/mystyles.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<h1>Articles</h1>
+    
+    <ul>
+    {% for product in products%}
+        <li> {{product["id"]}} -  
+            <a href="{{url_for('detail_post', id=product['id'])}}">
+                {{ product["name"] }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
