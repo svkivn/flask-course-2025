@@ -1,24 +1,29 @@
+# Flask Course 2025 — Lesson: Modular Application with Blueprints
 
-# Code Explanations
+This repository contains a Flask web application demonstrating modular architecture using Blueprints. The `lesson5-with-blueprint` branch showcases how to structure a Flask application by organizing related views and other code into reusable components.
 
-## app.py
+## 🔍 Overview
 
-- Imports Flask and related modules for web development.
-- Creates a Flask app instance and loads configuration from `config.py`.
-Defines several types of routes in Flask:
+In this lesson, we refactor the Flask application to use Blueprints, which allow for better organization and scalability. The application is divided into multiple modules, each responsible for a specific feature, making the codebase more maintainable.
 
-- **Static routes**: Serve fixed URLs, such as the root (`/`).
-- **Dynamic routes**: Use URL parameters to capture values, e.g., `/hi/<string:name>`. [Learn more](https://www.geeksforgeeks.org/python/generating-dynamic-urls-in-flask/)
-- **Query parameter routes**: Accept additional data via the URL query string, e.g., `/hi/ivan?age=30`. [Learn more](https://www.geeksforgeeks.org/python/get-request-query-parameters-with-flask/)
-- **Redirect routes**: Automatically forward users to another URL, such as `/admin` redirecting to the greetings page. [Learn more](https://www.geeksforgeeks.org/python/redirecting-to-url-in-flask/)
-	- `/` is the root route, which handles requests to the main page of the site.
-	- `/hi/<string:name>` greets the user by name (converted to uppercase) and optionally shows their age from the query string.
-		- This route demonstrates how to use query parameters. For example, `/hi/ivan?age=30` sets `name` to `ivan` and `age` to `30`. The code `age = request.args.get("age", 0, type=int)` retrieves the `age` parameter from the URL, defaulting to `0` if not provided.
-		- The return statement `f"Welcome {name=} {age=}"` uses an f-string to display the values of `name` and `age` in the response, and returns an HTTP status code 200 (OK).
-	- `/admin` redirects to the greetings page for "administrator".
-- The app runs with `app.run()` if executed directly.
+## 📁 Project Structure
 
-## config.py
+├── run.py # Application entry point
+├── config.py # Configuration settings (SECRET_KEY, DEBUG, etc.)
+├── requirements.txt # Python dependencies
+├── .flaskenv # Environment variables (FLASK_APP, FLASK_ENV)
+├── .gitignore # Files/folders ignored by Git
+├── app/ # Main application package
+│ 	├── init.py # Flask app creation and blueprint registration
+│ 	├── views.py # Main site routes
+	├── templates/ # HTML main templates
+	├── static/ # static files
+	├── tests/ # Unit tests
+	├── products/ # Blueprint for products routes
+	     ├── init.py # Blueprint initialization
+ 	     └── routes.py # Products routes for blueprint
+ 	     └── templates # HTML templates
+  			└── products/
+ 					├── products.html
+ 					└── detail_product.html
 
-- Sets `SECRET_KEY` for session security.
-- Enables debug mode with `FLASK_DEBUG = 1`.
