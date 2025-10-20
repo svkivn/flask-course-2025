@@ -8,21 +8,21 @@ In this lesson, we refactor the Flask application to use Blueprints, which allow
 
 ## 📁 Project Structure
 
-├── run.py # Application entry point
+── run.py # Application entry point
 
-├── config.py # Configuration settings (SECRET_KEY, DEBUG, etc.)
+── config.py # Configuration settings (SECRET_KEY, DEBUG, etc.)
 
-├── requirements.txt # Python dependencies
+── requirements.txt # Python dependencies
 
-├── .flaskenv # Environment variables (FLASK_APP, FLASK_ENV)
+── .flaskenv # Environment variables (FLASK_APP, FLASK_ENV)
 
-├── .gitignore # Files/folders ignored by Git
+── .gitignore # Files/folders ignored by Git
 
-├── app/ # Main application package
+── app/ # Main application package
 
-│ 	├── init.py # Flask app creation and blueprint registration
+ 	├── init.py # Flask app creation and blueprint registration
 
-│ 	├── views.py # Main site routes
+ 	├── views.py # Main site routes
 
 	├── templates/ # HTML main templates
 
