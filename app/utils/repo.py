@@ -31,6 +31,12 @@ class ProductRepository:
 
     def get_by_id(self, product_id):
         return next((p for p in self._products if p["id"] == product_id), None)
+    
+    def create(self, product_data):
+        new_id = max(p["id"] for p in self._products) + 1 if self._products else 1
+        product_data["id"] = new_id
+        self._products.append(product_data)
+        return product_data
 
   # Глобальний репозиторій для зручності
 product_repo = ProductRepository()

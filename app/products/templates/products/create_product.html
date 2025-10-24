@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+
+{% block head_extra %}
+    <link href="{{ url_for('static', filename='css/mystyles.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    
+{% from "_macros.html" import render_field %}
+        <div class="container mt-5">
+        <div class="card shadow-sm p-4 mx-auto" style="max-width: 600px;">
+            <h2 class="text-center mb-4">Add Product</h2>
+
+            <form method="POST" novalidate>
+                {{ form.hidden_tag() }}
+
+                {{ render_field(form.name, placeholder="Product name") }}
+                {{ render_field(form.content, placeholder="Product description") }}
+                {{ render_field(form.price, placeholder="0.00") }}
+
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-success px-4") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
