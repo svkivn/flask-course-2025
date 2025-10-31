@@ -1,6 +1,12 @@
-from app import app
+from app import create_app
+app = create_app(config_name="prod") # "dev", "test", "prod"
 
-if __name__ == "__main__":
-    app.run()  # Launch built-in web server and run this Flask webapp, debug=True
+with app.app_context():
+        print(f'App initialized with config: {app.config["SQLALCHEMY_DATABASE_URI"]=}, {app.config["SECRET_KEY"]=} ') 
+
+if __name__ == "__main__":    
+    app.run()
+
+
  
 

@@ -3,7 +3,7 @@ from flask import render_template, abort, flash, redirect, url_for, request
 from ..utils.repo import product_repo
 from .forms import PostForm
 
-@post_bp.route('/products') 
+@post_bp.route('/products', ) 
 def get_products():
     products = product_repo.get_all()
     return render_template("products.html", 

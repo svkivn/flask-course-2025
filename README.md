@@ -1,4 +1,4 @@
-# Flask Course 2025 — Lesson: Modular Application with Blueprints
+# Flask Course 2025 — Lesson: SQLa
 
 This repository contains a Flask web application demonstrating modular architecture using Blueprints. The `lesson5-with-blueprint` branch showcases how to structure a Flask application by organizing related views and other code into reusable components.
 
