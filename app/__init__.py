@@ -1,19 +1,3 @@
-# from flask import Flask
-
-# app = Flask(__name__)
-# app.config.from_object("config.DevelopmentConfig")
-
-# from . import views
-
-# from .products import post_bp
-# app.register_blueprint(post_bp, url_prefix="/shop")
-
-# # for testing purposes, print config values
-# with app.app_context():
-#     print("App initialized with config:", app.config["SQLALCHEMY_DATABASE_URI"], app.config["SECRET_KEY"])  
-
-
-# в app/__init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .config import config_map
@@ -47,8 +31,9 @@ def create_app(config_name: str = os.environ.get("FLASK_CONFIG", "dev")) -> Flas
         from .products import post_bp
         app.register_blueprint(post_bp, url_prefix="/shop")
 
-        print("Registered routes:")
-        for rule in app.url_map.iter_rules():
-            print(rule)
+        if config_name == "test":
+            print("Registered routes:")
+            for rule in app.url_map.iter_rules():
+                print(rule)
      
     return app

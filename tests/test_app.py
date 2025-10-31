@@ -4,7 +4,7 @@ from app import create_app
 class BasicTestCase(unittest.TestCase):
     def setUp(self):
         # Створюємо додаток з тестовою конфігурацією
-        self.app = create_app("dev")
+        self.app = create_app("test")
         # Отримуємо тестовий клієнт
         self.client = self.app.test_client()
 

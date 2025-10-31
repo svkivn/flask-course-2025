@@ -2,7 +2,6 @@ from flask import render_template, request, redirect, url_for, session, make_res
 #from . import app
 from datetime import timedelta
 
-
 main = Blueprint("main", __name__)
 
 @main.route('/')   # URL '/' to be handled by main() route handler
