@@ -9,29 +9,37 @@ from sqlalchemy import select
 
 @post_bp.route('/products', methods=['GET']) 
 def get_products():
-    stmt = select(Product) 
+    stmt = select(Product).order_by(Product.name.desc()) 
     products = db.session.scalars(stmt).all()
+    # implement render_template replacing the line with jsonify
+    return render_template("products.html", products=products)
+
     # Перетворюємо продукти у словники
-    products_list = [
-        {
-            'id': product.id,
-            'name': product.name,
-            'price': product.price,
-        } 
-        for product in products
-        ]   
-    return jsonify(products_list), 200
-    #implement render_template replacing the line with jsonify
-    #return render_template("products.html", products=products)
+    # products_list = [
+    #     {
+    #         'id': product.id,
+    #         'name': product.name,
+    #         'price': product.price,
+    #     } 
+    #     for product in products
+    #     ]   
+    # #return jsonify(products_list), 200
+    
+    
 
 @post_bp.route('/products/<int:id>') 
 def detail_post(id):
-    if id > 10:
-        abort(404)
-    product = product_repo.get_by_id(id)
+    # stmt = select(Product).where(Product.id == id)
+    # product = db.session.scalars(stmt).first()
+    #краще використовувати get із id    
+    product = db.session.get(Product, id)
+    if not product:
+        abort(404, description="Product not found") 
     return render_template("detail_post.html", 
                            product=product)
 
+
+# не реалізовано поки що додавання у БД
 @post_bp.route('/products/new', methods=['GET', 'POST']) 
 def create_product():    
     form = PostForm()

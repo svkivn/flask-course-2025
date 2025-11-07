@@ -7,10 +7,10 @@
 
 {% block content %}
  <h1> 
-   Product № {{product["id"]}} - {{product["name"]}} - {{ product["price"] }} 
+   Product № {{product.id}}  - {{ product.price}} 
 </h1>
 
-<p>{{ product.get('content') }}</p>
+<p>{{ product.name }}</p>
 
     <a href="#">Return posts</a>
 {% endblock %}

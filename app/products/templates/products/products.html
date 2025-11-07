@@ -10,9 +10,9 @@
     
     <ul>
     {% for product in products%}
-        <li> {{product["id"]}} -  
-            <a href="{{url_for('.detail_post', id=product['id'])}}">
-                {{ product["name"] }}
+        <li> {{product.id}} -  
+            <a href="{{url_for('.detail_post', id=product.id)}}">
+                {{ product.name}} - ${{ product.price}}
             </a>
         </li>
     {% endfor %}
