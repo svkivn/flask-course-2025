@@ -19,7 +19,7 @@
         - slug: String, indexed, unique
         - relationship: products (backref)
 
--Blueprint Endpoints:
+- Blueprint Endpoints:
     - GET /products
         - list products, support query params
         - support query params
