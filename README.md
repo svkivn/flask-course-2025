@@ -4,32 +4,32 @@
 - A small, well-structured Flask blueprint that exposes CRUD for a Product.
 
 - Models (SQLAlchemy)
-    -- Product
-        --- id: Integer, primary key
-        --- name: String, required, indexed
-        --- price: Numeric/Decimal(precision), required, default 0.00
-        --- active: Boolean, default True
-        --- category_id: ForeignKey -> Category.id, nullable
-        --- created_at, updated_at: DateTime (auto-managed)
-        --- relationship: category (many products → one category)
+    - Product
+        - id: Integer, primary key
+        - name: String, required, indexed
+        - price: Numeric/Decimal(precision), required, default 0.00
+        - active: Boolean, default True
+        - category_id: ForeignKey -> Category.id, nullable
+        - created_at, updated_at: DateTime (auto-managed)
+        - relationship: category (many products → one category)
 
-    -- Category
+    - Category
         - id: Integer, primary key
         - name: String, required, unique
         - slug: String, indexed, unique
         - relationship: products (backref)
 
 -Blueprint Endpoints:
-    -- GET /products
+    - GET /products
         - list products, support query params
         - support query params
-    -- GET /products/<int:id>
+    - GET /products/<int:id>
         - return single product or 404
-    -- GET/POST /products/create
+    - GET/POST /products/create
         - create new product 
-    -- GET/POST /products/<int:id>/updated
+    - GET/POST /products/<int:id>/updated
         - update existing product, partial updates allowed
-    -- GET/POST  /products/<int:id>/deleted
+    - GET/POST  /products/<int:id>/deleted
         - delete existing product with id
 
 ## Recommendations:
@@ -95,7 +95,7 @@ class Product(db.Model):
 ```
 
 Recommendations for lazy:
- -Use lazy="select" for simple or small datasets. (list of obj)
+- Use lazy="select" for simple or small datasets. (list of obj)
 - Use lazy="joined" for list views to avoid N+1 queries. (list of json)
 - Use lazy="dynamic" for large product lists when filtering or paginating. (query)
 
