@@ -24,9 +24,9 @@ class Product(db.Model):
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     price: Mapped[float] = mapped_column(Float, nullable=False)
     active: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, 
-                                                      server_default=func.now(),   
-                                                 )
+    # created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, 
+    #                                                   server_default=func.now(),   
+    #                                              )
     
     category_id: Mapped[int | None] = mapped_column(db.ForeignKey('categories.id'))
     category: Mapped["Category"] = relationship("Category", back_populates="products")

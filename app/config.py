@@ -6,6 +6,8 @@ load_dotenv()  # завантажує змінні з .env
 
 # Визначення базового каталогу - абсолютний шлях до папки, де знаходиться config.py
 basedir = os.path.abspath(os.path.dirname(__file__))
+print("Config basedir:", basedir)
+
 
 class BaseConfig:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-key")
@@ -15,8 +17,8 @@ class DevelopmentConfig(BaseConfig):
     DEBUG = True
     FLASK_DEBUG = 1 # для автоматичного перезавантаження
     SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "DEV_DATABASE_URL",
-        "sqlite:///" + os.path.join(basedir, "data.db")
+        "DEV_DATABASE_URL", #у .env має бути змінна DEV_DATABASE_URL
+        "sqlite:///" + os.path.join(basedir, "..", "instance", "dev-data.db")
     )
 
 
