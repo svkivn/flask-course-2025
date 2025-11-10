@@ -3,7 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum, Table, ForeignKey, select
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 import enum
+import os
 
+
+ 
+# === Правильний базовий шлях ===
+basedir = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 # === Enum для ролей ===
 class UserRole(enum.Enum):
     ADMIN = "admin"
@@ -11,17 +16,22 @@ class UserRole(enum.Enum):
     USER = "user"
 
 # === Ініціалізація Flask ===
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///relationship-example.db'
+app = Flask(__name__, instance_relative_config=False)
+print(basedir, app.instance_path)
+
+# Гарантуємо, що папка instance існує
+os.makedirs(app.instance_path, exist_ok=True)
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'relationship-example.db')}"
+ 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# === Проміжна таблиця Many-to-Many Post <-> Tag ===
+#=== Проміжна таблиця Many-to-Many Post <-> Tag ===
 post_tags = Table(
     "post_tags",
     db.metadata,
-    mapped_column("post_id", ForeignKey("posts.id"), primary_key=True),
-    mapped_column("tag_id", ForeignKey("tags.id"), primary_key=True)
+    db.Column("post_id", db.Integer, ForeignKey("posts.id"), primary_key=True),
+    db.Column("tag_id", db.Integer, ForeignKey("tags.id"), primary_key=True)
 )
 
 # === Моделі ===
@@ -81,25 +91,25 @@ with app.app_context():
     user1 = User(email="ok@gmail.com", role=admin_role)
     user2 = User(email="max@gmail.com", role=user_role)
 
-    # Профілі
+    # # Профілі
     user1.profile = Profile(bio="Адмін сайту", avatar_url="avatar1.png")
     user2.profile = Profile(bio="Звичайний користувач", avatar_url="avatar2.png")
 
-    # Пости
+    # # Пости
     post1 = Post(title="Перший пост", user=user1)
     post2 = Post(title="Другий пост", user=user2)
 
-    # Теги
+    # # Теги
     tag1 = Tag(name="Python")
     tag2 = Tag(name="Flask")
 
-    # Зв'язки постів з тегами через append
+    # # Зв'язки постів з тегами через append
     post1.tags.append(tag1)
     post1.tags.append(tag2)
     post2.tags.append(tag1)
 
     # Додавання всіх об'єктів
-    db.session.add_all([admin_role, user_role, user1, user2, post1, post2, tag1, tag2])
+    db.session.add_all([admin_role, user_role, user1, user2])
     db.session.commit()
 
 
