@@ -45,12 +45,10 @@ class Role(db.Model):
 class User(db.Model):
     __tablename__ = "users"
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(db.String, nullable=False)
-    role_id: Mapped[int] = mapped_column(ForeignKey("roles.id"))
+    # інші поля
 
     posts: Mapped[list["Post"]] = relationship(back_populates="user", cascade="all, delete-orphan")
-    profile: Mapped["Profile"] = relationship(back_populates="user", uselist=False, cascade="all, delete-orphan")
-    role: Mapped["Role"] = relationship(back_populates="users")
+
 
 
 class Profile(db.Model):
@@ -65,6 +63,7 @@ class Post(db.Model):
     __tablename__ = "posts"
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(db.String, nullable=False)
+    #інші поля
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
 
     user: Mapped["User"] = relationship(back_populates="posts")

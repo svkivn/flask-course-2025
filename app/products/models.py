@@ -17,6 +17,15 @@ class Category(db.Model):
         lazy="select"  # або 'dynamic' / 'joined'
     )
 
+
+# Association table for many-to-many relationship between Product and Tag
+product_tags = db.Table(
+    'product_tags', 
+    db.Column('product_id', db.Integer, db.ForeignKey('products.id'), primary_key=True),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+)
+
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -30,9 +39,28 @@ class Product(db.Model):
     
     category_id: Mapped[int | None] = mapped_column(db.ForeignKey('categories.id'))
     category: Mapped["Category"] = relationship("Category", back_populates="products")
+    tags: Mapped[list["Tag"]] = relationship(
+        secondary=product_tags,
+        back_populates="products"
+    )
 
     def __repr__(self) -> str:
         return f"<Product {self.name} - ${self.price}>"
     
     # def __str__(self) -> str:
     #     return f"<Product {self.name} - ${self.price}>"
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(50), nullable=False, unique=True)
+    products: Mapped[list["Product"]] = relationship(
+        secondary=product_tags,
+        back_populates="tags"
+    )   
+
+    def __repr__(self) -> str:
+        return f"<Tag {self.name}>" 
+    
+   
