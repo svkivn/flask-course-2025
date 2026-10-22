@@ -13,5 +13,5 @@ def detail_post(id):
     if id > 3:
         abort(404)
     product = product_repo.get_by_id(id)
-    return render_template("detail_post.html", 
+    return render_template("detail_product.html", 
                            product=product)
