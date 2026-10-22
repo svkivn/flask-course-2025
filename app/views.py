@@ -13,6 +13,9 @@ def login():
         username = request.form["login"]
         session["username"] = username
         return redirect(url_for("get_profile"))
+    # else:
+    #     if "username" in session:
+    #         return redirect(url_for("get_profile")) 
     return render_template("login.html")
 
 
