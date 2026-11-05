@@ -1,6 +1,7 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 # Application configuration
 app = Flask(__name__)
@@ -8,8 +9,13 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///shop.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db = SQLAlchemy(app)
+class Base(DeclarativeBase):
+  pass
 
+db = SQLAlchemy(model_class=Base)
+# initialize the app with the extension
+db.init_app(app)
+migrate = Migrate(app, db)
 
 # Model
 class Product(db.Model):
@@ -22,18 +28,19 @@ class Product(db.Model):
         nullable=False
     )
 
-    price: Mapped[float] = mapped_column(
-        db.Float,
-        nullable=False
-    )
+    # price: Mapped[float] = mapped_column(
+    #     db.Float,
+    #     nullable=False
+    # )
 
     def __repr__(self):
         return f"<Product {self.name}: {self.price}>"
 
 
-# CREATE TABLE
-with app.app_context():
-    db.create_all()
+# # CREATE TABLE
+# with app.app_context():
+#     db.create_all()
+#     #db.drop_all()
 
 
 # CREATE: add products
@@ -122,4 +129,7 @@ def delete_product(product_id):
 # Run application
 if __name__ == "__main__":
     app.run(debug=True)
- 
+
+
+
+#https://www.deployhq.com/blog/mastering-code-first-database-deployments-with-flask-and-sqlalchemy
